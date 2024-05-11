@@ -4,10 +4,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import "bootstrap/dist/css/bootstrap.min.css"
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router} from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { configure } from '@testing-library/react';
+import contactReducer from './Redux/Reducers/contactReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import {Provider} from "react-redux"
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// const store = configureStore(contactReducer, composeWithDevTools)
+const store = configureStore({
+  reducer: {
+    // Assuming contactReducer is a default export from your contactReducer file
+    contacts: contactReducer
+  }
+})
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
+    <Router>
     <App />
+    </Router>
+    </Provider>
+    
   </React.StrictMode>
 );
 
